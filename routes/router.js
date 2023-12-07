@@ -101,7 +101,6 @@ router.post('/reviews', async (req, res) => {
     RETURNING id;
   `;
 
-
     const reviewResult = await pool.query(reviewInsertQuery, [product_id, rating, summary, body, recommend, name, email]);
     const reviewId = reviewResult.rows[0].id;
 

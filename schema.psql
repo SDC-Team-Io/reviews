@@ -29,7 +29,7 @@ CREATE TABLE photos (
 -- Create Characteristics Table
 CREATE TABLE characteristics (
   characteristic_id SERIAL PRIMARY KEY,
-  product_id INT,  -- Modify this line based on your data model
+  product_id INT REFERENCES reviews(product_id),
   name TEXT
 );
 

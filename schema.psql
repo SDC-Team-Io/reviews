@@ -1,0 +1,44 @@
+CREATE DATABASE sdc;
+
+DROP TABLE IF EXISTS reviews, photos, characteristics, char_reviews CASCADE;
+
+-- Create Reviews Table
+CREATE TABLE reviews (
+  id INT PRIMARY KEY,
+  product_id INT,
+  rating VARCHAR,
+  review_temp_date BIGINT,
+  review_date DATE,
+  summary TEXT,
+  body TEXT,
+  recommend BOOLEAN,
+  reported BOOLEAN,
+  reviewer_name TEXT,
+  reviewer_email TEXT,
+  response TEXT,
+  helpfulness INT
+);
+
+-- Create Photos Table
+CREATE TABLE photos (
+  photo_id INT PRIMARY KEY,
+  review_id INT REFERENCES reviews(id),
+  url TEXT
+);
+
+-- Create Characteristics Table
+CREATE TABLE characteristics (
+  characteristic_id INT PRIMARY KEY,
+  product_id INT REFERENCES reviews(product_id),
+  name TEXT
+);
+
+-- Create Characteristic Reviews Table
+CREATE TABLE char_reviews (
+  id INT PRIMARY KEY,
+  characteristic_id INT REFERENCES characteristics(characteristic_id),
+  review_id INT REFERENCES reviews(id),
+  value INT
+);
+
+CREATE INDEX idx_characteristics_product_id ON characteristics(product_id);

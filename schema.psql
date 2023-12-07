@@ -1,6 +1,6 @@
 CREATE DATABASE sdc;
 
-DROP TABLE IF EXISTS reviews, photos, characteristics, char_reviews,
+DROP TABLE IF EXISTS reviews, photos, characteristics, char_reviews CASCADE;
 
 -- Create Reviews Table
 CREATE TABLE reviews (
@@ -42,3 +42,6 @@ CREATE TABLE char_reviews (
 );
 
 CREATE INDEX idx_characteristics_product_id ON characteristics(product_id);
+CREATE INDEX idx_char_reviews_characteristic_id ON char_reviews(characteristic_id);
+CREATE INDEX idx_photos_review_id ON photos(review_id);
+CREATE INDEX idx_char_reviews_review_id ON char_reviews(review_id);

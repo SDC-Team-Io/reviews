@@ -1,6 +1,6 @@
 CREATE DATABASE sdc;
 
-DROP TABLE IF EXISTS reviews, photos, characteristics, char_reviews,
+DROP TABLE IF EXISTS reviews, photos, characteristics, char_reviews CASCADE;
 
 -- Create Reviews Table
 CREATE TABLE reviews (

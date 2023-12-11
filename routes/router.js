@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Pool } = require('pg');
+const cacheMiddleware = require('../cacheMiddleware.js');
 require('dotenv').config();
 
 const pool = new Pool({
@@ -10,7 +11,7 @@ const pool = new Pool({
   ssl: false
 });
 
-router.get('/reviews/:id', async (req, res) => {
+router.get('/reviews/:id', cacheMiddleware(30), async (req, res) => {
   const id = req.params.id
   try {
     const queryText = `SELECT * FROM reviews WHERE product_id=${id};`;
@@ -22,7 +23,7 @@ router.get('/reviews/:id', async (req, res) => {
   }
 })
 
-router.get('/reviews/meta/:id', async (req, res) => {
+router.get('/reviews/meta/:id', cacheMiddleware(30), async (req, res) => {
   try {
     const productId = req.params.id;
 
